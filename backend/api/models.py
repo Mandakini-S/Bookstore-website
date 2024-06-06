@@ -2,11 +2,10 @@ from django.db import models
   
 # Create your models here.  
   
-class Students(models.Model):  
+class Customer(models.Model):  
     first_name = models.CharField(max_length=200)  
     last_name = models.CharField(max_length=200)  
-    address = models.CharField(max_length=200)  
-    roll_number = models.IntegerField()  
+    address = models.CharField(max_length=200)   
     mobile = models.CharField(max_length=10)  
   
     def __str__(self):  
