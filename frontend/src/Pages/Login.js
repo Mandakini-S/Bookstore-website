@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import loginimage from '../assets/login_page.jpg';
@@ -23,27 +22,23 @@ const Login = () => {
   };
 
   return (
-    <div className="containerr">
-    <div className='loginn'>
-     <div className="log">
+    <div className="flex flex-row justify-between w-full m-0">
+      <div className="bg-white pl-[10%] flex items-center justify-center w-1/2">
+        <div className="mt-[40%] flex flex-col h-[75vh]">
+          <h2 className="text-3xl font-semibold font-poppins">Welcome back!</h2>
+          <h3 className="text-lg font-medium text-black mt-2 font-poppins">Please enter your details.</h3>
 
-       <h2>Welcome back!</h2>
-       <h3>Please enter your details.</h3>
+          <div className="flex items-center justify-between my-5">
+            <div className="border-t w-full"></div>
+            <div className="px-4">or</div>
+            <div className="border-t w-full"></div>
+          </div>
 
-       {/* <div className="google align ">
-         <FcGoogle/>&nbsp;&nbsp; Log in with Google.
-       </div> */}
-       
-       <div className='orr' style={{marginTop: "20px", marginBottom:"20px"}}>
-         <div className='line'></div>
-         <div className='or'>or</div>
-         <div className='line'></div>
-       </div>
           <form onSubmit={handleLogin}>
-            <div style={{marginTop: "20px", marginBottom:"20px"}}>
+            <div className="my-5">
               <input
                 type="email"
-                className="email my-2"
+                className="font-poppins border border-gray-400 rounded-xl h-14 w-[459px] pl-5"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
@@ -52,39 +47,39 @@ const Login = () => {
             <div>
               <input
                 type="password"
-                className="email my-2"
+                className="font-poppins border border-gray-400 rounded-xl h-14 w-[459px] pl-5"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
               />
             </div>
 
-            <div className='orr_or' style={{marginTop: "20px", marginBottom:"20px"}}>
-              <div className='checkbox'><input type ="checkbox"/><h3 className='my-1 mmm' style={{fontSize:'16px'}}>&nbsp;&nbsp;Remember Me</h3></div>
-              <h3 className='my-1'>Forgot Password?</h3>
-
+            <div className="flex items-center justify-between my-5">
+              <div className="flex items-center">
+                <input type="checkbox" className="border border-black" />
+                <h3 className="ml-2 text-base font-medium font-poppins">Remember Me</h3>
+              </div>
+              <h3 className="text-base font-medium font-poppins">Forgot Password?</h3>
             </div>
 
             <div>
-              <button type="submit" className="but my-4">
+              <button type="submit" className="bg-blue-600 text-white rounded-xl h-14 w-[459px] text-lg">
                 Log In
               </button>
             </div>
           </form>
 
-          <div className="orr last" style={{ fontSize: '14px',marginTop: "20px", marginBottom:"20px" }}>
+          <div className="flex items-center justify-center text-sm mt-5 font-poppins">
             Don't have an account?{' '}
-            <Link to="/user-signup" className="no_underline blue-text">
-              &nbsp;Sign up
+            <Link to="/user-signup" className="no-underline text-blue-600 ml-2">
+              Sign up
             </Link>
           </div>
         </div>
       </div>
 
-      <div className="imagee">
-        <div className="img">
-          <img src={loginimage} alt="bookshelf" />
-        </div>
+      <div className="flex items-end justify-end w-1/2">
+        <img src={loginimage} alt="bookshelf" className="h-full w-[86%]" />
       </div>
     </div>
   );
