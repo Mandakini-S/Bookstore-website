@@ -3,21 +3,28 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import loginimage from '../assets/login_page.jpg';
 
-const Login = () => {
+const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
     try {
-      const response = await axios.post('/api/login', { email, password });
+      const response = await axios.post('/api/signup', { email, password });
       console.log(response.data);
-      // Handle successful login, e.g., save token, redirect
-      navigate('/enter');
+      // Handle successful signup, e.g., save token, redirect
+      navigate('/login');
     } catch (error) {
-      console.error('There was an error logging in!', error);
-      // Handle login error
+      console.error('There was an error signing up!', error);
+      setError('There was an error signing up!');
+      
     }
   };
 
@@ -25,8 +32,8 @@ const Login = () => {
     <div className="flex flex-row justify-between w-full m-0">
       <div className="bg-white pl-[10%] flex items-center justify-center w-1/2">
         <div className="mt-[40%] flex flex-col h-[75vh]">
-          <h2 className="text-3xl font-semibold font-poppins">Welcome back!</h2>
-          <h3 className="text-lg font-medium text-black mt-2 font-poppins">Please enter your details.</h3>
+          <h2 className="text-3xl font-semibold font-poppins">Welcome!</h2>
+          <h3 className="text-lg font-medium text-black mt-2 font-poppins">Please enter your details to sign up.</h3>
 
           <div className="flex items-center justify-between my-5">
             <div className="border-t w-full"></div>
@@ -34,7 +41,7 @@ const Login = () => {
             <div className="border-t w-full"></div>
           </div>
 
-          <form onSubmit={handleLogin}>
+          <form onSubmit={handleSignup}>
             <div className="my-5">
               <input
                 type="email"
@@ -42,6 +49,7 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
+                required
               />
             </div>
             <div>
@@ -51,28 +59,33 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
+                required
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                className="font-poppins border border-gray-400 rounded-xl h-14 w-[459px] my-5 pl-5"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Confirm Password"
+                required
               />
             </div>
 
-            <div className="flex items-center justify-between my-5">
-              <div className="flex items-center">
-                <input type="checkbox" className="border border-black" />
-                <h3 className="ml-2 text-base font-medium font-poppins">Remember Me</h3>
-              </div>
-              <h3 className="text-base font-medium font-poppins">Forgot Password?</h3>
-            </div>
+            {error && <div className="text-red-500 text-sm mb-5">{error}</div>}
 
             <div>
-              <button type="submit" className="bg-blue-600 text-white rounded-xl h-14 w-[459px] text-lg">
-                Log In
+              <button type="submit" className="bg-blue-600 text-white rounded-xl h-14 w-[459px] my-5 text-lg">
+                Sign up
               </button>
             </div>
           </form>
 
           <div className="flex items-center justify-center text-sm mt-5 font-poppins">
-            Don't have an account?{' '}
-            <Link to="/user-signup" className="no-underline text-blue-600 ml-2">
-              Sign up
+            Already have an account?{' '}
+            <Link to="/login" className="no-underline text-blue-600 ml-2">
+              Log in
             </Link>
           </div>
         </div>
@@ -85,4 +98,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
