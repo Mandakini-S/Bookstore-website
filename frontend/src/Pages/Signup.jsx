@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { AuthContext } from '../Context/AuthContext';
 import loginimage from '../assets/login_page.jpg';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { register } = useContext(AuthContext);
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -17,14 +19,11 @@ const Signup = () => {
       return;
     }
     try {
-      const response = await axios.post('/api/signup', { email, password });
-      console.log(response.data);
-      // Handle successful signup, e.g., save token, redirect
+      await register(email, username, password);
       navigate('/login');
     } catch (error) {
       console.error('There was an error signing up!', error);
       setError('There was an error signing up!');
-      
     }
   };
 
@@ -52,6 +51,16 @@ const Signup = () => {
                 required
               />
             </div>
+            <div className="my-5">
+              <input
+                type="text"
+                className="font-poppins border border-gray-400 rounded-xl h-14 w-[459px] pl-5"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Username"
+                required
+              />
+            </div>
             <div>
               <input
                 type="password"
@@ -76,7 +85,7 @@ const Signup = () => {
             {error && <div className="text-red-500 text-sm mb-5">{error}</div>}
 
             <div>
-              <button type="submit" className="bg-blue-600 text-white rounded-xl h-14 w-[459px] my-5 text-lg">
+              <button type="submit" className="bg-blue-600 text-white rounded-xl h-14 w-[459px] my-5 text-lg" style={{ backgroundColor: '#f48908' }}>
                 Sign up
               </button>
             </div>

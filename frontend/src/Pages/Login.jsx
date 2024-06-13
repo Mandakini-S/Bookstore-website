@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { AuthContext } from '../Context/AuthContext';
 import loginimage from '../assets/login_page.jpg';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/login', { email, password });
-      console.log(response.data);
-      // Handle successful login, e.g., save token, redirect
+      await login(email, password);
       navigate('/home');
     } catch (error) {
       console.error('There was an error logging in!', error);
-      // Handle login error
+      // Handle login error, e.g., show a notification
     }
   };
 
@@ -63,11 +62,10 @@ const Login = () => {
             </div>
 
             <div>
-              <button type="submit" className="bg-blue-600 text-white rounded-xl h-14 w-[459px] text-lg">
+              <button type="submit" className="bg-blue-600 text-white rounded-xl h-14 w-[459px] text-lg"style={{ backgroundColor: '#f48908' }}>
                 Log In
               </button>
             </div>
-
           </form>
 
           <div className="flex items-center justify-center text-sm mt-5 font-poppins">
