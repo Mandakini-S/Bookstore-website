@@ -23,7 +23,7 @@ const Signup = () => {
       navigate('/login');
     } catch (error) {
       console.error('There was an error signing up!', error);
-      setError('There was an error signing up!');
+      setError(error.message || 'There was an error signing up! Please try again.');
     }
   };
 

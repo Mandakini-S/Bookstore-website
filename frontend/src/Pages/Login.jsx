@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(email, password);
-      navigate('/home');
+      navigate('/');
     } catch (error) {
       console.error('There was an error logging in!', error);
       // Handle login error, e.g., show a notification
