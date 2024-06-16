@@ -90,14 +90,25 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql', 
+#         'NAME': 'Bookstore_website',
+#         'USER': 'postgres',
+#        'PASSWORD': 'superuser123',
+#        'HOST': '127.0.0.1',
+#        'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql', 
-        'NAME': 'Bookstore_website',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
         'USER': 'postgres',
-       'PASSWORD': 'superuser123',
-       'HOST': '127.0.0.1',
-       'PORT': '5432',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',   # Docker Compose service name
+        'PORT': '5432',
     }
 }
 
