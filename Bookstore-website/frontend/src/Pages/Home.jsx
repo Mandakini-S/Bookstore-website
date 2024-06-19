@@ -1,12 +1,13 @@
 // ./Pages/Home.jsx
 import React from 'react';
+import Hero from '../Component/Hero';
 
 function Home() {
   return (
     <div>
-       <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+      
+      <Hero />
+    
     </div>
   );
 }
